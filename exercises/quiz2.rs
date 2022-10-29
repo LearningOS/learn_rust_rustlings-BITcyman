@@ -35,33 +35,35 @@ mod my_module {
         for (string, command) in input.iter() {
             match command{
                 Command::Uppercase => {
-                    string.replace("a","A");
-                    string.replace("b","B");
-                    string.replace("c","C");
-                    string.replace("d","D");
-                    string.replace("e","E");
-                    string.replace("f","F");
-                    string.replace("g","G");
-                    string.replace("h","H");
-                    string.replace("i","I");
-                    string.replace("j","J");
-                    string.replace("k","K");
-                    string.replace("l","L");
-                    string.replace("m","M");
-                    string.replace("n","N");
-                    string.replace("o","O");
-                    string.replace("p","P");
-                    string.replace("q","Q");
-                    string.replace("r","R");
-                    string.replace("s","S");
-                    string.replace("t","T");
-                    string.replace("u","U");
-                    string.replace("v","V");
-                    string.replace("w","W");
-                    string.replace("x","X");
-                    string.replace("y","Y");
-                    string.replace("z","Z");
-
+                    let mut string = string.to_string();
+                    // string = string.replace("a","A");
+                    // string = string.replace("b","B");
+                    // string = string.replace("c","C");
+                    // string = string.replace("d","D");
+                    // string = string.replace("e","E");
+                    // string = string.replace("f","F");
+                    // string = string.replace("g","G");
+                    // string = string.replace("h","H");
+                    // string = string.replace("i","I");
+                    // string = string.replace("j","J");
+                    // string = string.replace("k","K");
+                    // string = string.replace("l","L");
+                    // string = string.replace("m","M");
+                    // string = string.replace("n","N");
+                    // string = string.replace("o","O");
+                    // string = string.replace("p","P");
+                    // string = string.replace("q","Q");
+                    // string = string.replace("r","R");
+                    // string = string.replace("s","S");
+                    // string = string.replace("t","T");
+                    // string = string.replace("u","U");
+                    // string = string.replace("v","V");
+                    // string = string.replace("w","W");
+                    // string = string.replace("x","X");
+                    // string = string.replace("y","Y");
+                    // string = string.replace("z","Z");
+                    string = string.to_uppercase();
+                    output.push(string.to_string())
 
                 },
                 Command::Trim => {
@@ -74,8 +76,8 @@ mod my_module {
                 Command::Append(s)=>{
                     let s0 = string;
                     let mut string = string.to_string();
-                    for _ in 0..*s{
-                        string.push_str(s0);
+                    for _ in 0..(*s){
+                        string.push_str("bar");
                     }
                     output.push(string)
                 },
@@ -88,7 +90,7 @@ mod my_module {
 fn main() {
     
     use my_module::transformer;
-
+    it_works();
     
     fn it_works() {
         let output = transformer(vec![
