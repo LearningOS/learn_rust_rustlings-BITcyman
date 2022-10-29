@@ -18,7 +18,6 @@
 // - The output element is going to be a Vector of strings.
 // Execute `rustlings hint quiz2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 pub enum Command {
     Uppercase,
@@ -30,23 +29,67 @@ mod my_module {
     use super::Command;
 
     // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
+    pub fn transformer(input: Vec<(String,Command)>) -> Vec<String> {
         // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+        let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
+            match command{
+                Command::Uppercase => {
+                    string.replace("a","A");
+                    string.replace("b","B");
+                    string.replace("c","C");
+                    string.replace("d","D");
+                    string.replace("e","E");
+                    string.replace("f","F");
+                    string.replace("g","G");
+                    string.replace("h","H");
+                    string.replace("i","I");
+                    string.replace("j","J");
+                    string.replace("k","K");
+                    string.replace("l","L");
+                    string.replace("m","M");
+                    string.replace("n","N");
+                    string.replace("o","O");
+                    string.replace("p","P");
+                    string.replace("q","Q");
+                    string.replace("r","R");
+                    string.replace("s","S");
+                    string.replace("t","T");
+                    string.replace("u","U");
+                    string.replace("v","V");
+                    string.replace("w","W");
+                    string.replace("x","X");
+                    string.replace("y","Y");
+                    string.replace("z","Z");
+
+
+                },
+                Command::Trim => {
+                    let mut string = string.to_string();
+                    string.remove(0);
+                    let len = string.len();
+                    string.remove(len-1);
+                    output.push(string)
+                },
+                Command::Append(s)=>{
+                    let s0 = string;
+                    let mut string = string.to_string();
+                    for _ in 0..*s{
+                        string.push_str(s0);
+                    }
+                    output.push(string)
+                },
+            }
         }
         output
     }
 }
 
-#[cfg(test)]
-mod tests {
-    // TODO: What do we have to import to have `transformer` in scope?
-    use ???;
-    use super::Command;
+fn main() {
+    
+    use my_module::transformer;
 
-    #[test]
+    
     fn it_works() {
         let output = transformer(vec![
             ("hello".into(), Command::Uppercase),
