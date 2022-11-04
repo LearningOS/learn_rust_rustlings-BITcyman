@@ -4,14 +4,23 @@
 // - Macros
 
 // Write a macro that passes the quiz! No hints this time, you can do it!
+// #[proc_macro]
+// pub fn my_macro(s: &str) -> &str{
+//     let mut hello = "Hello ".to_string();
+//     hello.push_str(s);
+//     &hello
+// }
+
 macro_rules! my_macro{
-    ($ s: expr) =>{
-        let mut ret: &str= "Hello ";
-        ${
-            ret.push($s);
-        }*
-        ret
-    }
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_str = "Hello ".to_string();
+            $(
+                temp_str.push_str($x);
+            )*
+            temp_str
+        }
+    };
 }
 
 #[cfg(test)]

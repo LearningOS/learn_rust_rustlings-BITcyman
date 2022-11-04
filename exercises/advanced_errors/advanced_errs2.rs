@@ -16,7 +16,7 @@
 // 4. Complete the partial implementation of `Display` for
 //    `ParseClimateError`.
 
-// I AM NOT DONE
+
 
 use std::error::Error;
 use std::fmt::{self, Display, Formatter};
@@ -46,12 +46,13 @@ impl From<ParseIntError> for ParseClimateError {
 // `ParseFloatError` values.
 impl From<ParseFloatError> for ParseClimateError {
     fn from(e: ParseFloatError) -> Self {
-        // TODO: Complete this function
+        Self::ParseFloat(e)
     }
 }
 
 // TODO: Implement a missing trait so that `main()` below will compile. It
 // is not necessary to implement any methods inside the missing trait.
+
 
 // The `Display` trait allows for other code to obtain the error formatted
 // as a user-visible string.
