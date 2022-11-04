@@ -3,16 +3,15 @@
 // you pass it an empty string. It'd be nicer if it explained what the problem
 // was, instead of just sometimes returning `None`. Thankfully, Rust has a similar
 // construct to `Option` that can be used to express error conditions. Let's use it!
-// Execute `rustlings hint errors1` for hints!
+// Execute `rustlings hint errors1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
-pub fn generate_nametag_text(name: String) -> Option<String> {
-    if name.len() > 0 {
-        Some(format!("Hi! My name is {}", name))
+
+pub fn generate_nametag_text(name: String) -> Result<String,String> {
+    if name.is_empty() {
+        Err(format!("`name` was empty; it must be nonempty."))
     } else {
-        // Empty names aren't allowed.
-        None
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 

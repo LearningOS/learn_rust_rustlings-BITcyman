@@ -4,6 +4,8 @@
 // Additionally, upon implementing FromStr, you can use the `parse` method
 // on strings to generate an object of the implementor type.
 // You can read more about it at https://doc.rust-lang.org/std/str/trait.FromStr.html
+// Execute `rustlings hint from_str` or use the `hint` watch subcommand for a hint.
+
 use std::num::ParseIntError;
 use std::str::FromStr;
 
@@ -26,7 +28,7 @@ enum ParsePersonError {
     ParseInt(ParseIntError),
 }
 
-// I AM NOT DONE
+
 
 // Steps:
 // 1. If the length of the provided string is 0, an error should be returned
@@ -37,10 +39,44 @@ enum ParsePersonError {
 //    with something like `"4".parse::<usize>()`
 // 6. If while extracting the name and the age something goes wrong, an error should be returned
 // If everything goes well, then return a Result of a Person object
+//
+// As an aside: `Box<dyn Error>` implements `From<&'_ str>`. This means that if you want to return a
+// string error message, you can do so via just using return `Err("my error message".into())`.
 
 impl FromStr for Person {
     type Err = ParsePersonError;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        let nameage= String::from(s.to_string());
+        if nameage.len()==0 {
+            return Err(ParsePersonError::Empty);
+        }
+        let mut ssplit = nameage.split(',');
+        let name: String;
+        match ssplit.next(){
+            Some(s) =>{
+                if !s.is_empty(){
+                    name = s.parse().unwrap();
+                }
+                else {
+                    return Err(ParsePersonError::NoName)
+                }
+            }
+            None => return Err(ParsePersonError::BadLen)
+        }
+        let mut age: usize;
+        match ssplit.next(){
+            Some(x) =>{
+                match x.parse::<usize>(){
+                    Ok(m) => age = m,
+                    Err(e) => return Err(ParsePersonError::ParseInt(e)),
+                }
+            }
+            None => return Err(ParsePersonError::BadLen),
+        }
+        match ssplit.next(){
+            Some(x) => return return Err(ParsePersonError::BadLen),
+            None => return Ok(Person{ name: name, age:age}),
+        }
     }
 }
 
